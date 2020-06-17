@@ -31,19 +31,20 @@ public class GameController {
 //        return 1;
 //    }
 
-        @GetMapping("/FristWin")
+        @GetMapping("/GameWhetherWon")
     public int FristWin(@RequestParam String userAnswerString){
         int  score = 0;
         RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
         GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
         List<String> userAnswer = Arrays.asList(userAnswerString.split(" "));
-        guessNumberGame.guess(userAnswer);
-        if (guessNumberGame.getStatus().equals(GameStatus.SUCCEED)){
-            score = score +3;
-        }else (guessNumberGame.getStatus().equals(GameStatus.FAILED)){
-            score = score -3;
+        for(int i = 0 ; i<= guessNumberGame.getMAX_TRY_TIMES(); i++){
+            guessNumberGame.guess(userAnswer);
+            if (guessNumberGame.getStatus().equals(GameStatus.SUCCEED)){
+                score = score +3;
+            }else if(guessNumberGame.getStatus().equals(GameStatus.FAILED) && guessNumberGame.getLeftTryTimes() == 0) {
+                score = score - 3;
+            }
         }
-
         return score;
     }
 

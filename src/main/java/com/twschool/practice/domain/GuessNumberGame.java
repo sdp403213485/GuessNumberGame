@@ -41,4 +41,16 @@ public class GuessNumberGame {
     public GameStatus getStatus() {
         return status;
     }
+
+    public int getLeftTryTimes() {
+        return leftTryTimes;
+    }
+
+    public void setLeftTryTimes(int leftTryTimes) {
+        this.leftTryTimes = leftTryTimes;
+    }
+
+    public int getMAX_TRY_TIMES() {
+        return MAX_TRY_TIMES;
+    }
 }

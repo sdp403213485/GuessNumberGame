@@ -43,14 +43,5 @@ public class GameServiceTest
     }
 
 
-    @Test
-    public void should_return_guess_result() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/game")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("guess","1 2 3 4"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.input").value( "1 2 3 4"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("4A0B"));
-    }
 }
 

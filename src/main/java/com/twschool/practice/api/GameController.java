@@ -18,4 +18,11 @@ public class GameController {
         return map;
     }
 
+    @GetMapping("/FristWin")
+    public Map<String, String> FristWin(@RequestParam String guess){
+        Map<String,String> map = new HashMap<>();
+        map.put("input", guess);
+        map.put("score", "3");
+        return map;
+    }
 }

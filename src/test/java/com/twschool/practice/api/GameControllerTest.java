@@ -3,6 +3,7 @@ package com.twschool.practice.api;
 import com.twschool.practice.domain.Answer;
 import com.twschool.practice.domain.GuessNumberGame;
 import com.twschool.practice.domain.RandomAnswerGenerator;
+import com.twschool.practice.service.GameService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

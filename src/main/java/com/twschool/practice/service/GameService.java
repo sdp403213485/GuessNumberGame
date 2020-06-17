@@ -1,4 +1,4 @@
-package com.twschool.practice.api;
+package com.twschool.practice.service;
 
 import com.twschool.practice.domain.GuessNumberGame;
 
@@ -21,6 +21,7 @@ public class GameService {
         return guessNumberGame.guess(userAnswer);
 
     }
+
 
 
 }

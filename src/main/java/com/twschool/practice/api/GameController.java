@@ -14,6 +14,8 @@ import java.util.Map;
 
 @RestController
 public class GameController {
+    RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
+    GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
 
     @GetMapping("/game")
     public Map<String, String> guess(@RequestParam String guess) {
@@ -31,21 +33,29 @@ public class GameController {
 //        return 1;
 //    }
 
-        @GetMapping("/GameWhetherWon")
-    public int FristWin(@RequestParam String userAnswerString){
+        @GetMapping("/OneWhetherWon")
+    public int OneWhetherWon(@RequestParam String userAnswerString){
         int  score = 0;
-        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
-        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
         List<String> userAnswer = Arrays.asList(userAnswerString.split(" "));
-        for(int i = 0 ; i<= guessNumberGame.getMAX_TRY_TIMES(); i++){
             guessNumberGame.guess(userAnswer);
             if (guessNumberGame.getStatus().equals(GameStatus.SUCCEED)){
                 score = score +3;
             }else if(guessNumberGame.getStatus().equals(GameStatus.FAILED) && guessNumberGame.getLeftTryTimes() == 0) {
                 score = score - 3;
+            }else{
+                score = score;
             }
-        }
         return score;
+    }
+
+    @GetMapping("/OneGameWhetherWon")
+    public int OneGameWhetherWon(){
+        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
+        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
+        for(int i = 0; i <= guessNumberGame.getMAX_TRY_TIMES(); i++){
+
+         }
+
     }
 
 

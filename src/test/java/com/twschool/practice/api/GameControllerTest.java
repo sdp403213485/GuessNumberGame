@@ -37,30 +37,17 @@ public class GameControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("4A0B"));
     }
 
-
     @Test
     public void should_return_3_result() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/FristWin")
+        mockMvc.perform(MockMvcRequestBuilders.get("/OneWhetherWin")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("guess","1 2 3 4"))
+                .param( "user","")
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.input").value( "1 2 3 4"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.score").value("3"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("4A0B"));
     }
 
-    @Test
-    public void should_return_guess_result_when_given_current() throws Exception{
-        //given
-        String answer1 = "1 2 3 4";
-        Answer answer = new Answer(Arrays.asList("1", "2", "3", "4"));
-        RandomAnswerGenerator randomAnswerGenerator = Mockito.mock(RandomAnswerGenerator.class);
-        Mockito.when(randomAnswerGenerator.generateAnswer()).thenReturn(answer);
-        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
-        GameService gameService = new GameService(guessNumberGame);
-        //when
-        String result = gameService.guess(answer1);
-        //then
-        Assert.assertEquals("4A0B",result);
-    }
+
 
 }

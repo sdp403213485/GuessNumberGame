@@ -32,7 +32,7 @@ public class GameController {
 //        return 1;
 //    }
 
-        @GetMapping("/OneWhetherWn")
+        @GetMapping("/OneWhetherWin")
         public int OneWhetherWon(@RequestParam String userAnswerString,@RequestParam User user){
         user.setTotalScore(0);
         RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
@@ -46,6 +46,7 @@ public class GameController {
             }
         return user.getTotalScore();
     }
+
 //    public int OneWhetherWon(@RequestParam String userAnswerString){
 ////        int  score = 0;
 ////        List<String> userAnswer = Arrays.asList(userAnswerString.split(" "));

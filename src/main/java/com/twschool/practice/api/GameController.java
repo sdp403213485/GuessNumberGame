@@ -48,15 +48,15 @@ public class GameController {
         return score;
     }
 
-    @GetMapping("/OneGameWhetherWon")
-    public int OneGameWhetherWon(){
-        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
-        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
-        for(int i = 0; i <= guessNumberGame.getMAX_TRY_TIMES(); i++){
-
-         }
-
-    }
+//    @GetMapping("/OneGameWhetherWon")
+//    public int OneGameWhetherWon(){
+//        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
+//        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
+//        for(int i = 0; i <= guessNumberGame.getMAX_TRY_TIMES(); i++){
+//
+//         }
+//
+//    }
 
 
 }

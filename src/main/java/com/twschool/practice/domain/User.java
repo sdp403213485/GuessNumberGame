@@ -1,24 +1,51 @@
 package com.twschool.practice.domain;
 
 public class User {
-    private int totalScore;
-    private int UserID;
+    private int UserId;
+    private int playTimes;
+    private int totalPoints;
+    private int continueWinCount;
 
-    public int getTotalScore() {
-        return totalScore;
+    public int getUserId() {
+        return UserId;
     }
 
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
+    public void setUserId(int userId) {
+        UserId = userId;
     }
 
-    public int getUserID() {
-        return UserID;
+    public int getPlayTimes() {
+        return playTimes;
     }
 
-    public void setUserID(int userID) {
-        UserID = userID;
+    public void setPlayTimes(int playTimes) {
+        this.playTimes = playTimes;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
+    public int getContinueWinCount() {
+        return continueWinCount;
+    }
+
+    public void setContinueWinCount(int continueWinCount) {
+        this.continueWinCount = continueWinCount;
+    }
+
+
+    public User(int userId, int playTimes, int totalPoints, int continueWinCount) {
+        UserId = userId;
+        this.playTimes = playTimes;
+        this.totalPoints = totalPoints;
+        this.continueWinCount = continueWinCount;
+    }
+
+    public User() {
     }
 }
-
-

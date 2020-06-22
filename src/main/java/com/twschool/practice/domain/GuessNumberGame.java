@@ -13,7 +13,12 @@ public class GuessNumberGame {
 
     public GuessNumberGame(RandomAnswerGenerator randomAnswerGenerator) {
         this.randomAnswerGenerator = randomAnswerGenerator;
-        this.answer = randomAnswerGenerator.generateAnswer();
+        this.answer = answer;
+    }
+
+    public GuessNumberGame(Answer answer) {
+        this.randomAnswerGenerator = randomAnswerGenerator;
+        this.answer = answer;
     }
 
     public String guess(List<String> userAnswerNumbers) {

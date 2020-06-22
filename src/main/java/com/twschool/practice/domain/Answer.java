@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Answer {
-    
+
     private List<String> answerNumbers;
 
     public Answer(List<String> answerNumbers) {

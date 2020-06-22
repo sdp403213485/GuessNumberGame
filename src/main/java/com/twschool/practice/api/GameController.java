@@ -1,9 +1,6 @@
 package com.twschool.practice.api;
 
-import com.twschool.practice.domain.GameStatus;
-import com.twschool.practice.domain.GuessNumberGame;
-import com.twschool.practice.domain.RandomAnswerGenerator;
-import com.twschool.practice.domain.User;
+import com.twschool.practice.domain.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,19 +31,46 @@ public class GameController {
 
         @GetMapping("/OneWhetherWin")
         public int OneWhetherWon(@RequestParam String userAnswerString,@RequestParam User user){
-        user.setTotalScore(0);
+        user.setTotalPoints(0);
         RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
         GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
         List<String> userAnswer = Arrays.asList(userAnswerString.split(" "));
             guessNumberGame.guess(userAnswer);
             if (guessNumberGame.getStatus().equals(GameStatus.SUCCEED)){
-                user.setTotalScore(user.getTotalScore()+3);
+                user.setTotalPoints(user.getTotalPoints()+3);
             }else if(guessNumberGame.getStatus().equals(GameStatus.FAILED) ) {
-                user.setTotalScore(user.getTotalScore()-3);;
+                user.setTotalPoints(user.getTotalPoints()-3);;
             }
-        return user.getTotalScore();
+        return user.getTotalPoints();
     }
 
+
+    @GetMapping("/oneGuessByOneUser")
+    public Map<String,Integer> oneGuessByOneUser( @RequestParam String guess){
+        User user = new User();
+        //user.setTotalPoints(0);
+        List<String> userAnswerNumber = Arrays.asList(guess.split(" "));
+        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
+        Answer answer = new Answer(Arrays.asList("1 2 3 4".split(" ")));
+        GuessNumberGame guessNumberGame = new GuessNumberGame(answer);
+        guessNumberGame.guess(userAnswerNumber);
+        if (guessNumberGame.getStatus().equals(GameStatus.SUCCEED)){
+            user.setTotalPoints(user.getTotalPoints()+3);
+            user.setContinueWinCount(user.getContinueWinCount()+1);
+            if (user.getContinueWinCount() % 3 == 0){
+                user.setTotalPoints(user.getTotalPoints()+2);
+            }
+            if (user.getContinueWinCount() % 5 == 0){
+                user.setTotalPoints(user.getTotalPoints()+3);
+            }
+        }else {
+            user.setTotalPoints(user.getTotalPoints()-3);
+            user.setContinueWinCount(0);
+        }
+        Map<String,Integer> map = new HashMap<>();
+        map.put("totalPoint",user.getTotalPoints());
+        return map;
+    }
 //    public int OneWhetherWon(@RequestParam String userAnswerString){
 ////        int  score = 0;
 ////        List<String> userAnswer = Arrays.asList(userAnswerString.split(" "));

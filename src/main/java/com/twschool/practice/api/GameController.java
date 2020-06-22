@@ -71,6 +71,21 @@ public class GameController {
         map.put("totalPoint",user.getTotalPoints());
         return map;
     }
+
+    @GetMapping("/oneGameByOneUser")
+    public int oneGameByOneUser(@RequestParam User user, @RequestParam String guess){
+        user.setTotalPoints(0);
+        List<String> userAnswerNumber = Arrays.asList(guess.split(" "));
+        RandomAnswerGenerator randomAnswerGenerator = new RandomAnswerGenerator();
+        GuessNumberGame guessNumberGame = new GuessNumberGame(randomAnswerGenerator);
+        guessNumberGame.guess(userAnswerNumber);
+        if (guessNumberGame.getStatus().equals(GameStatus.SUCCEED)){
+            user.setTotalPoints(user.getTotalPoints()+3);
+        }else if (guessNumberGame.getStatus().equals(GameStatus.FAILED)){
+            user.setTotalPoints(user.getTotalPoints()-3);
+        }
+        return user.getTotalPoints();
+    }
 //    public int OneWhetherWon(@RequestParam String userAnswerString){
 ////        int  score = 0;
 ////        List<String> userAnswer = Arrays.asList(userAnswerString.split(" "));
